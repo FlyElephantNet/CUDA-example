@@ -1,4 +1,4 @@
-## Save and Restore a model using TensorFlow
+## Matrix Multiplication (GPU & CPU)
 
 ## Run command
 - GPU: nvcc Matrix_Multiplication_cuda.cu -o MMC && ./MMC

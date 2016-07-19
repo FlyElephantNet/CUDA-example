@@ -66,7 +66,7 @@ int main(){
 	if(!InitCUDA())
 		return 0;
 	printf("CUDA initialized.\n");
-    fprintf(f, "CUDA initialized.\n", end);
+    fprintf(f, "CUDA initialized.\n");
 
 
 	int i;
