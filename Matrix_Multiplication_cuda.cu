@@ -4,13 +4,6 @@
 
 #define TILE_WIDTH 16
 
-FILE *f = fopen("file.txt", "w");
-if (f == NULL)
-{
-    printf("Error opening file!\n");
-    exit(1);
-}
-
 bool InitCUDA(){
 	int count;
 	cudaDeviceProp prop;
@@ -63,16 +56,18 @@ __global__ void MatrixMulKernel(float* Md, float* Nd, float* Pd, int Width){
 
 
 int main(){
+    FILE *f = fopen("result.txt", "w");
+        if (f == NULL)
+        {
+          printf("Error opening file!\n");
+          exit(1);
+         }
+
 	if(!InitCUDA())
 		return 0;
 	printf("CUDA initialized.\n");
+    fprintf(f, "CUDA initialized.\n", end);
 
-    FILE *f = fopen("file.txt", "w");
-    if (f == NULL)
-    {
-        printf("Error opening file!\n");
-        exit(1);
-    }
 
 	int i;
     for(i = 8; i <= 1024; i *= 2){
@@ -106,7 +101,7 @@ int main(){
 
 	clock_t end = (clock() - start) / 1000;
 	printf("%d * %d, uses time: %ldms\n", i, i, end);
-	fprintf("%d * %d, uses time: %ldms\n", i, i, end);
+	fprintf(f, "%d * %d, uses time: %ldms\n", i, i, end);
     }
 
     fclose(f);

@@ -31,6 +31,12 @@ void matmult(float* a, float* b, float* c, int n){
 }
 
 int main(){
+    FILE *f = fopen("result.txt", "w");
+        if (f == NULL)
+        {
+          printf("Error opening file!\n");
+          exit(1);
+         }
     int i;
     for(i = 8; i <= 1024; i = i * 2){	
         clock_t start = clock();
@@ -39,6 +45,9 @@ int main(){
         matmult(a, b, c, i);
 	    clock_t end = (clock() - start) / 1000;
     	printf("%d * %d, uess time: %ldms\n", i, i, end);
+    	fprintf(f, "%d * %d, uses time: %ldms\n", i, i, end);
+
     }
+    fclose(f);
 	return 0;
 }
